@@ -2,15 +2,13 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-import os
-import pickle
+import joblib 
 
 st.title("Car Price Prediction App")
 
 #pipe = pickle.load(open("pipe.pkl", "rb+"))
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-pipe = pickle.load(open(os.path.join(BASE_DIR, "pipe.pkl"), "rb"))
+pipe = joblib.load("pipe.pkl")
+prediction = pipe.predict(data)
 
 df = pd.read_csv("final_data.csv")
 companies = sorted(df["company"].unique())
