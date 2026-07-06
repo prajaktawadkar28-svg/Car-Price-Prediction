@@ -2,10 +2,16 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
+import os
+import pickle
 
 st.title("Car Price Prediction App")
 
-pipe = pickle.load(open("pipe.pkl", "rb+"))
+#pipe = pickle.load(open("pipe.pkl", "rb+"))
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+pipe = pickle.load(open(os.path.join(BASE_DIR, "pipe.pkl"), "rb"))
+
 df = pd.read_csv("final_data.csv")
 companies = sorted(df["company"].unique())
 years = range(2000, 2027)
